@@ -1,8 +1,10 @@
-﻿namespace SM_Horarios;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace SM_Horarios;
 
 public interface IMarkedTimeHandler : IGenericRepositoryHandler<MarkedTimeDTO>
 {
-    public ActionResult<IEnumerable<MarkedTimeDTO>> GetByFirmIdAsync(int firmId);
-    public ActionResult<IEnumerable<MarkedTimeDTO>> GetByEmployeeIdAsync(int employeeId);
-    public ActionResult<IEnumerable<MarkedTimeDTO>> GetByClientIdAsync(int clientId);
+    public Response<IEnumerable<MarkedTimeDTO>> GetByFirmIdAsync(int firmId);
+    public Response<IEnumerable<MarkedTimeDTO>> GetByEmployeeIdAsync(int employeeId);
+    public Response<IEnumerable<MarkedTimeDTO>> GetByClientIdAsync(int clientId);
 }

@@ -4,5 +4,5 @@ namespace SM_Horarios;
 
 public interface IClientHandler : IGenericRepositoryHandler<Client>
 {
-    public ActionResult<IEnumerable<Client>> GetClientByNameAsync(string clientName);
+    public Response<IEnumerable<Client>> GetClientByNameAsync(string clientName);
 }

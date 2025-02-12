@@ -4,5 +4,5 @@ namespace SM_Horarios;
 
 public interface IEmployeeHandler : IGenericRepositoryHandler<Employee>
 {
-    public ActionResult<IEnumerable<Employee>> GetEmployeeByFirmAsync(int firmId);
+    public Response<IEnumerable<Employee>> GetEmployeeByFirmAsync(int firmId);
 }
