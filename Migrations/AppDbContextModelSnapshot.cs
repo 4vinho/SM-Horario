@@ -55,6 +55,9 @@ namespace SM_Horarios.Migrations
                     b.Property<int>("AccessCode")
                         .HasColumnType("int");
 
+                    b.Property<int>("FirmId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -62,6 +65,8 @@ namespace SM_Horarios.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FirmId");
 
                     b.ToTable("Employee");
                 });
@@ -77,9 +82,6 @@ namespace SM_Horarios.Migrations
                     b.Property<string>("AccessCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -87,8 +89,6 @@ namespace SM_Horarios.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Firm");
                 });
@@ -124,15 +124,15 @@ namespace SM_Horarios.Migrations
                     b.ToTable("MarkedTime");
                 });
 
-            modelBuilder.Entity("SM_Horarios.Firm", b =>
+            modelBuilder.Entity("SM_Horarios.Employee", b =>
                 {
-                    b.HasOne("SM_Horarios.Employee", "Employee")
-                        .WithMany("Firm")
-                        .HasForeignKey("EmployeeId")
+                    b.HasOne("SM_Horarios.Firm", "Firm")
+                        .WithMany("Employee")
+                        .HasForeignKey("FirmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("Firm");
                 });
 
             modelBuilder.Entity("SM_Horarios.MarkedTime", b =>
@@ -169,13 +169,13 @@ namespace SM_Horarios.Migrations
 
             modelBuilder.Entity("SM_Horarios.Employee", b =>
                 {
-                    b.Navigation("Firm");
-
                     b.Navigation("MarkedTime");
                 });
 
             modelBuilder.Entity("SM_Horarios.Firm", b =>
                 {
+                    b.Navigation("Employee");
+
                     b.Navigation("MarkedTime");
                 });
 #pragma warning restore 612, 618

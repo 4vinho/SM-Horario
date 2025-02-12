@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SM_Horarios.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigrations : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,21 +27,6 @@ namespace SM_Horarios.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employee",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AccessCode = table.Column<int>(type: "int", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Firm",
                 columns: table => new
                 {
@@ -49,16 +34,31 @@ namespace SM_Horarios.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AccessCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Firm", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AccessCode = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirmId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Firm_Employee_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employee",
+                        name: "FK_Employee_Firm_FirmId",
+                        column: x => x.FirmId,
+                        principalTable: "Firm",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -98,9 +98,9 @@ namespace SM_Horarios.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Firm_EmployeeId",
-                table: "Firm",
-                column: "EmployeeId");
+                name: "IX_Employee_FirmId",
+                table: "Employee",
+                column: "FirmId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MarkedTime_ClientId",
@@ -128,10 +128,10 @@ namespace SM_Horarios.Migrations
                 name: "Client");
 
             migrationBuilder.DropTable(
-                name: "Firm");
+                name: "Employee");
 
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Firm");
         }
     }
 }

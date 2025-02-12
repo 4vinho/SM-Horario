@@ -8,6 +8,8 @@ public class Employee
     public int AccessCode { get; set; }
     public string? Password { get; set; }
 
-    public ICollection<Firm>? Firm { get; set; }
+    public int FirmId { get; set; }
+    public Firm? Firm { get; set; }
+
     public ICollection<MarkedTime>? MarkedTime { get; set; }
 }
