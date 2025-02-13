@@ -67,7 +67,7 @@ public class FirmHandler(AppDbContext context, IMapper _mapper) : IFirmHandler
         }
     }
 
-    public async Task<PagedResponse<IEnumerable<FirmDTO>?>> GetByNameAsync(
+    public async Task<PagedResponse<IEnumerable<FirmDTO>?>> GetFirmByNameAsync(
         string name,
         PagedRequest pagedRequest
     )
