@@ -5,6 +5,7 @@ C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\SM-Horarios.deps.jso
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\SM-Horarios.runtimeconfig.json
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\SM-Horarios.dll
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\SM-Horarios.pdb
+C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\Azure.Core.dll
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\Administrator\Desktop\SM-Horarios\bin\Debug\net8.0\Humanizer.dll

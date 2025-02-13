@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SM_Horarios;
 
-public class MarkedTimeHandler(AppDbContext context) : IMarkedTimeHandler
+public class MarkedTimeHandler : IMarkedTimeHandler
 {
+    private readonly AppDbContext context;
     private readonly IMapper _mapper;
 
     public async Task<Response<MarkedTimeDTO?>> CreateTDataAsync(MarkedTimeDTO tData)
@@ -19,7 +20,9 @@ public class MarkedTimeHandler(AppDbContext context) : IMarkedTimeHandler
             await context.MarkedTime.AddAsync(markedTime);
             await context.SaveChangesAsync();
 
-            return new Response<MarkedTimeDTO?>(201, "MarkedTime create is success", tData);
+            var markedTimeDTO = _mapper.Map<MarkedTimeDTO>(tData);
+
+            return new Response<MarkedTimeDTO?>(201, "MarkedTime create is success", markedTimeDTO);
         }
         catch (Exception ex)
         {
@@ -141,12 +144,12 @@ public class MarkedTimeHandler(AppDbContext context) : IMarkedTimeHandler
                     null
                 );
 
-            var markedTimeCollection = _mapper.Map<IEnumerable<MarkedTimeDTO>>(data);
+            var markedTimeDTOCollection = _mapper.Map<IEnumerable<MarkedTimeDTO>>(data);
 
             return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                 200,
                 "MarkedTime get is success",
-                markedTimeCollection
+                markedTimeDTOCollection
             );
         }
         catch (Exception ex)
@@ -164,9 +167,9 @@ public class MarkedTimeHandler(AppDbContext context) : IMarkedTimeHandler
             if (data == null)
                 return new Response<MarkedTimeDTO?>(404, "MarkedTime not found", null);
 
-            var markedTime = _mapper.Map<MarkedTimeDTO>(data);
+            var markedTimeDTO = _mapper.Map<MarkedTimeDTO>(data);
 
-            return new Response<MarkedTimeDTO?>(200, "MarkedTime get is success", markedTime);
+            return new Response<MarkedTimeDTO?>(200, "MarkedTime get is success", markedTimeDTO);
         }
         catch (Exception ex)
         {

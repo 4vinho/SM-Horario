@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SM-Horarios")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c84624b9ed7bf2335e5450463e144b36a03808cf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b20d0ce6cf83499b32960973e783379ab522c0c")]
 [assembly: System.Reflection.AssemblyProductAttribute("SM-Horarios")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SM-Horarios")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

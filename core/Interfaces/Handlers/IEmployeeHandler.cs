@@ -2,9 +2,9 @@
 
 namespace SM_Horarios;
 
-public interface IEmployeeHandler : IGenericRepositoryHandler<Employee>
+public interface IEmployeeHandler : IGenericRepositoryHandler<EmployeeDTO>
 {
-    public Task<PagedResponse<IEnumerable<Employee>?>> GetEmployeesByFirmAsync(
+    public Task<PagedResponse<IEnumerable<EmployeeDTO>?>> GetEmployeesByFirmIdAsync(
         int firmId,
         PagedRequest pagedRequest
     );
