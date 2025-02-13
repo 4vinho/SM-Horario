@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SM_Horarios;
 
-public class FirmHandler : IFirmHandler
+public class FirmHandler(AppDbContext context, IMapper _mapper) : IFirmHandler
 {
-    private readonly AppDbContext context;
-    private readonly IMapper _mapper;
-
     public async Task<Response<FirmDTO?>> CreateTDataAsync(FirmDTO tData)
     {
         try
@@ -84,7 +81,7 @@ public class FirmHandler : IFirmHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<FirmDTO>?>(404, "Firm not found", null);
 
             var firmDTOCollection = _mapper.Map<IEnumerable<FirmDTO>>(data);
@@ -92,7 +89,9 @@ public class FirmHandler : IFirmHandler
             return new PagedResponse<IEnumerable<FirmDTO>?>(
                 200,
                 "Firm get is success",
-                firmDTOCollection
+                firmDTOCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)

@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SM_Horarios;
 
-public class MarkedTimeHandler : IMarkedTimeHandler
+public class MarkedTimeHandler(AppDbContext context, IMapper _mapper) : IMarkedTimeHandler
 {
-    private readonly AppDbContext context;
-    private readonly IMapper _mapper;
-
     public async Task<Response<MarkedTimeDTO?>> CreateTDataAsync(MarkedTimeDTO tData)
     {
         try
@@ -65,7 +62,7 @@ public class MarkedTimeHandler : IMarkedTimeHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                     404,
                     "Client MarkedTime not found",
@@ -77,7 +74,9 @@ public class MarkedTimeHandler : IMarkedTimeHandler
             return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                 200,
                 "MarkedTime get is success",
-                markedTimeCollection
+                markedTimeCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)
@@ -101,7 +100,7 @@ public class MarkedTimeHandler : IMarkedTimeHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                     404,
                     "Employee MarkedTime not found",
@@ -113,7 +112,9 @@ public class MarkedTimeHandler : IMarkedTimeHandler
             return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                 200,
                 "MarkedTime get is success",
-                markedTimeCollection
+                markedTimeCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)
@@ -137,7 +138,7 @@ public class MarkedTimeHandler : IMarkedTimeHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                     404,
                     "Firm MarkedTime not found",
@@ -149,7 +150,9 @@ public class MarkedTimeHandler : IMarkedTimeHandler
             return new PagedResponse<IEnumerable<MarkedTimeDTO>?>(
                 200,
                 "MarkedTime get is success",
-                markedTimeDTOCollection
+                markedTimeDTOCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)

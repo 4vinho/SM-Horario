@@ -1,13 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.CodeAnalysis;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace SM_Horarios;
 
-public class ClientHandler : IClientHandler
+public class ClientHandler(AppDbContext context, IMapper _mapper) : IClientHandler
 {
-    private readonly AppDbContext context;
-    private readonly IMapper _mapper;
-
     public async Task<Response<ClientDTO?>> CreateTDataAsync(ClientDTO tData)
     {
         try
@@ -84,7 +82,7 @@ public class ClientHandler : IClientHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<ClientDTO>?>(404, "Client not found", null);
 
             var clientDTOCollection = _mapper.Map<IEnumerable<ClientDTO>>(data);
@@ -92,7 +90,9 @@ public class ClientHandler : IClientHandler
             return new PagedResponse<IEnumerable<ClientDTO>?>(
                 200,
                 "Client get is success",
-                clientDTOCollection
+                clientDTOCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)

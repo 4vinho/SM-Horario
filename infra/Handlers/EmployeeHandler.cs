@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SM_Horarios;
 
-public class EmployeeHandler : IEmployeeHandler
+public class EmployeeHandler(AppDbContext context, IMapper _mapper) : IEmployeeHandler
 {
-    private readonly AppDbContext context;
-    private readonly IMapper _mapper;
-
     public async Task<Response<EmployeeDTO?>> CreateTDataAsync(EmployeeDTO tData)
     {
         try
@@ -84,7 +81,7 @@ public class EmployeeHandler : IEmployeeHandler
                 .Take(pagedRequest.PageSize)
                 .ToListAsync();
 
-            if (data is null)
+            if (!data.Any())
                 return new PagedResponse<IEnumerable<EmployeeDTO>?>(
                     404,
                     "Employee not found",
@@ -96,7 +93,9 @@ public class EmployeeHandler : IEmployeeHandler
             return new PagedResponse<IEnumerable<EmployeeDTO>?>(
                 200,
                 "Employee get is success",
-                employeeDTOCollection
+                employeeDTOCollection,
+                pagedRequest.PageSize,
+                pagedRequest.PageCount
             );
         }
         catch (Exception ex)
