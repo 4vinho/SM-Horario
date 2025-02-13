@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "FMyM5Hz+mC6Gy6xSGLy+7+ptCqiEwnR6mc0CoTP6GWfqvJpah0WTyupdGQsE6yoqdLqMaaE6YdGQY1sImnm3eA==",
+  "dgSpecHash": "xk/jERMkgywsuOraChjnG6G7Y3tl5qjGLheayeru6zID06jW65HV+IzyXzIvoVLkqUTYnNHNxqAkdjdLKCNKWw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\SM-Horarios\\SM-Horarios.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

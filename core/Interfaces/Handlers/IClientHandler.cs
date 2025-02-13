@@ -4,5 +4,8 @@ namespace SM_Horarios;
 
 public interface IClientHandler : IGenericRepositoryHandler<Client>
 {
-    public Response<IEnumerable<Client>> GetClientByNameAsync(string clientName);
+    public Task<PagedResponse<IEnumerable<Client>?>> GetClientByNameAsync(
+        string clientName,
+        PagedRequest pagedRequest
+    );
 }
